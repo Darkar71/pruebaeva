@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SportClub – Tu mejor versión comienza hoy</title>
+  <link rel="stylesheet" href="CSS/styles.css">
+  <style>
+    body {
+      overflow-x: hidden;
+    }
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      background-color: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .site-header .logo-container img {
+      height: 50px;
+    }
+
+    .main-nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    .main-nav a {
+      text-decoration: none;
+      color: var(--purple-dark);
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+
+    .main-nav a:hover {
+      color: var(--yellow-hover);
+    }
+
+    .header-auth {
+      display: flex;
+      gap: 10px;
+    }
+
+    .header-auth .btn-sm {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .btn-login {
+      border: 2px solid var(--purple-dark);
+      color: var(--purple-dark);
+    }
+
+    .btn-register {
+      background-color: var(--yellow);
+      color: var(--purple-dark);
+    }
+
+    .hero-carousel {
+      position: relative;
+      width: 100%;
+      height: 90vh;
+      margin-top: 80px;
+      overflow: hidden;
+    }
+
+    .carousel-container {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      animation: carouselSlide 15s infinite;
+    }
+
+    .carousel-item {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .carousel-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(46, 26, 71, 0.5);
+    }
+
+    @keyframes carouselSlide {
+      0%, 20% { transform: translateX(0); }
+      25%, 45% { transform: translateX(-33.33%); }
+      50%, 70% { transform: translateX(-66.66%); }
+      75%, 100% { transform: translateX(0); }
+    }
+
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: var(--white);
+      z-index: 10;
+      width: 90%;
+      max-width: 800px;
+    }
+
+    .hero-content h1 {
+      font-size: 4.5rem;
+      line-height: 1;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 15px rgba(0,0,0,0.6);
+    }
+
+    .hero-content .landing-tagline {
+      display: inline-block;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background-color: var(--yellow);
+      color: var(--purple-dark);
+      padding: 5px 15px;
+      margin-bottom: 20px;
+    }
+
+    .hero-content p {
+      font-size: 1.4rem;
+      margin-bottom: 35px;
+      text-shadow: 1px 1px 8px rgba(0,0,0,0.7);
+    }
+
+    .planes-section, .horarios-section, .contacto-section {
+      padding: 80px 5%;
+      background-color: var(--white);
+    }
+
+    .section-title {
+      text-align: center;
+      color: var(--purple-dark);
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 50px;
+      font-size: 1.1rem;
+    }
+
+    .pricing-table, .horarios-table {
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: var(--white);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    }
+
+    .pricing-header, .horarios-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background-color: var(--purple-dark);
+      color: var(--white);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .pricing-row, .horarios-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--gray-mid);
+    }
+
+    .plan-name-col, .horario-col {
+      padding: 25px 40px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: var(--purple-dark);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    .price-col, .actividad-col {
+      padding: 25px 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: #fafafa;
+    }
+
+    .price-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--purple-dark);
+    }
+
+    .contacto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .contacto-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 1.1rem;
+    }
+
+    .info-item i {
+      font-size: 1.5rem;
+      color: var(--purple-dark);
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 250px;
+      background-color: #eee;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      border: 2px dashed var(--gray-mid);
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+      text-decoration: none;
+      z-index: 1000;
+    }
+
+    .site-footer {
+      background-color: var(--purple-dark);
+      color: white;
+      padding: 50px 5%;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .main-nav { display: none; }
+      .hero-content h1 { font-size: 3rem; }
+      .contacto-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="logo-container">
+      <img src="logo_empresa_letra_v1.png" alt="SportClub">
+    </div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#planes">Planes</a></li>
+        <li><a href="#horarios">Horarios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="header-auth">
+      <a href="login.html" class="btn-sm btn-login">Iniciar Sesión</a>
+      <a href="register.html" class="btn-sm btn-register">Registrarse</a>
+    </div>
+  </header>
+
+  <section class="hero-carousel">
+    <div class="carousel-container">
+      <div class="carousel-item" style="background-image: url('img/gim1.webp');"></div>
+      <div class="carousel-item" style="background-image: url('img/gim2.webp');"></div>
+      <div class="carousel-item" style="background-image: url('img/gim3.jpg');"></div>
+    </div>
+    <div class="hero-content">
+      <span class="landing-tagline">Tu mejor versión comienza hoy</span>
+      <h1>ENTRENA CON LOS MEJORES</h1>
+      <p>Programas personalizados, tecnología de vanguardia y una comunidad que te motiva a superar tus límites cada día.</p>
+      <div style="display:flex; gap:15px; justify-content:center;">
+        <a href="register.html" class="btn-primary btn-yellow" style="width:auto; padding:15px 40px; text-decoration:none;">¡ÚNETE AHORA!</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="planes" class="planes-section">
+    <h2 class="section-title">MEMBRESÍAS</h2>
+    <p class="section-subtitle">Invierte en tu salud con nuestros planes especializados</p>
+    <div class="pricing-table">
+      <div class="pricing-header">
+        <div>PLAN</div>
+        <div>VALOR</div>
+      </div>
+      <div class="pricing-row">
+        <div class="plan-name-col">🗓️ PLAN MENSUAL</div>
+        <div class="price-col">
+          <span class="price-value">$28.000</span>
+          <span class="price-duration">Mensual</span>
+        </div>
+      </div>
+      <div class="pricing-row">
+        <div class="plan-name-col">📊 PLAN TRIMESTRAL</div>
+        <div class="price-col">
+          <span class="price-value">$75.000</span>
+          <span class="price-duration">Cada 3 meses</span>
+        </div>
+      </div>
+      <div class="pricing-row" style="background-color: #fef8e6;">
+        <div class="plan-name-col" style="color:#d9a404;">🏆 PLAN ANUAL</div>
+        <div class="price-col" style="background-color: #fffdf5;">
+          <span class="price-value">$305.000</span>
+          <span class="price-duration">Mejor opción</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="horarios" class="horarios-section" style="background-color: var(--gray-light);">
+    <h2 class="section-title">NUESTROS HORARIOS</h2>
+    <p class="section-subtitle">Abierto de Lunes a Sábado para tu comodidad</p>
+    <div class="horarios-table">
+      <div class="horarios-header">
+        <div>BLOQUE</div>
+        <div>DISPONIBILIDAD</div>
+      </div>
+      <div class="horarios-row">
+        <div class="horario-col">🌅 Mañana</div>
+        <div class="actividad-col">06:00 AM - 12:00 PM</div>
+      </div>
+      <div class="horarios-row">
+        <div class="horario-col">☀️ Tarde</div>
+        <div class="actividad-col">14:00 PM - 18:00 PM</div>
+      </div>
+      <div class="horarios-row">
+        <div class="horario-col">🌙 Noche</div>
+        <div class="actividad-col">18:00 PM - 22:30 PM</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="contacto-section">
+    <h2 class="section-title">CONTÁCTANOS</h2>
+    <p class="section-subtitle">¿Tienes dudas? Estamos aquí para ayudarte</p>
+    <div class="contacto-grid">
+      <div class="contacto-info">
+        <div class="info-item">
+          <span>📧</span>
+          <strong>contacto.info@sportclub.com</strong>
+        </div>
+        <div class="info-item">
+          <span>📍</span>
+          <span>Av. Las Palmas #456, La Serena, Chile</span>
+        </div>
+        <div class="info-item">
+          <span>📞</span>
+          <span>+56 9 1234 5678</span>
+        </div>
+        <div style="margin-top:20px;">
+            <p><strong>Síguenos:</strong> @SportClub_Chile</p>
+        </div>
+      </div>
+      <div class="map-placeholder">
+        📍 [Mapa de ubicación próximamente]
+      </div>
+    </div>
+  </section>
+
+  <a href="#" class="whatsapp-float">💬</a>
+
+  <footer class="site-footer">
+    <img src="logo_empresa_letra_v1.png" alt="SportClub" style="height:50px; margin-bottom:20px;">
+    <p>© 2025 SportClub. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>

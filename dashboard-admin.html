@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Control – SportClub</title>
+  <link rel="stylesheet" href="CSS/styles.css">
+  <style>
+    body.dashboard {
+      background-color: #f0f2f5;
+    }
+
+    .dash-header {
+      background-color: var(--purple-dark);
+      padding: 10px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .dash-header img {
+      height: 45px;
+    }
+
+    .dash-nav {
+      background: white;
+      padding: 0 5%;
+      display: flex;
+      gap: 20px;
+      border-bottom: 1px solid var(--gray-mid);
+    }
+
+    .dash-nav a {
+      padding: 15px 5px;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .dash-nav a.active, .dash-nav a:hover {
+      color: var(--purple-dark);
+      border-bottom-color: var(--yellow);
+    }
+
+    .dash-main {
+      padding: 30px 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border-left: 5px solid var(--purple-dark);
+    }
+
+    .stat-card span {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .stat-card strong {
+      font-size: 1.8rem;
+      color: var(--purple-dark);
+      font-family: 'Bebas Neue', sans-serif;
+    }
+
+    .dashboard-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-bottom: 25px;
+    }
+
+    .card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--purple-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--gray-light);
+      padding-bottom: 10px;
+    }
+
+    .dash-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .dash-table th {
+      text-align: left;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding: 12px;
+      background: #fafafa;
+    }
+
+    .dash-table td {
+      padding: 12px;
+      border-top: 1px solid #f0f0f0;
+      font-size: 0.9rem;
+    }
+
+    .status-pill {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .status-pill.active { background: #e8f5e9; color: #2e7d32; }
+    .status-pill.pending { background: #fff3e0; color: #ef6c00; }
+
+    .btn-icon {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 5px;
+      transition: transform 0.2s;
+    }
+
+    .btn-icon:hover { transform: scale(1.2); }
+
+    .admin-action-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--purple-dark);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .dashboard-content { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="dashboard">
+
+  <header class="dash-header">
+    <img src="logo_empresa_letra_v1.png" alt="SportClub">
+    <div style="display: flex; gap: 15px; align-items: center;">
+      <div style="text-align: right; line-height: 1;">
+        <div style="color: white; font-weight: 800; font-size: 0.9rem;">ADMIN CENTRAL</div>
+        <small style="color: var(--yellow); font-size: 0.7rem;">Modo Superusuario</small>
+      </div>
+      <a href="index.html" style="text-decoration: none; background: #cc0000; color: white; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700;">Salir</a>
+    </div>
+  </header>
+
+  <nav class="dash-nav">
+    <a href="#" class="active">Vista Global</a>
+    <a href="#usuarios">Usuarios</a>
+    <a href="#pagos">Finanzas</a>
+    <a href="#inventario">Inventario</a>
+    <a href="#reportes">Reportes</a>
+  </nav>
+
+  <main class="dash-main">
+    
+    <div style="margin-bottom: 30px;">
+      <h2 style="color: var(--purple-dark); font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 1px;">Gestión de SportClub 🛡️</h2>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <span>Total Miembros</span>
+        <strong>1.240</strong>
+      </div>
+      <div class="stat-card" style="border-left-color: var(--yellow);">
+        <span>Ingresos Mes (CLP)</span>
+        <strong>$38.750.000</strong>
+      </div>
+      <div class="stat-card">
+        <span>Clases Activas</span>
+        <strong>48</strong>
+      </div>
+      <div class="stat-card" style="border-left-color: #2e7d32;">
+        <span>Nuevos Hoy</span>
+        <strong>+12</strong>
+      </div>
+    </div>
+
+    <div class="dashboard-content">
+      
+      <div class="left-col">
+        <div class="card">
+          <h3>👥 Usuarios Recientes <button style="font-size: 0.8rem; background: var(--gray-light); border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Ver todos</button></h3>
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Usuario</th>
+                <th>Plan</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Juan Pérez</strong><br><small>juan@mail.com</small></td>
+                <td>🏆 Anual</td>
+                <td><span class="status-pill active">Activo</span></td>
+                <td><button class="btn-icon">👁️</button> <button class="btn-icon">✏️</button></td>
+              </tr>
+              <tr>
+                <td><strong>María García</strong><br><small>m.garcia@mail.com</small></td>
+                <td>🗓️ Mensual</td>
+                <td><span class="status-pill active">Activo</span></td>
+                <td><button class="btn-icon">👁️</button> <button class="btn-icon">✏️</button></td>
+              </tr>
+              <tr>
+                <td><strong>Roberto Solís</strong><br><small>rob@mail.com</small></td>
+                <td>📊 Trimestral</td>
+                <td><span class="status-pill active">Activo</span></td>
+                <td><button class="btn-icon">👁️</button> <button class="btn-icon">✏️</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="right-col">
+        <div class="card">
+          <h3>⚡ Acciones Rápidas</h3>
+          <button class="admin-action-btn">+ Crear Nuevo Usuario</button>
+          <button class="admin-action-btn" style="background: var(--yellow); color: var(--purple-dark);">📊 Generar Reporte PDF</button>
+          <button class="admin-action-btn" style="background: #f0f0f0; color: #444;">⚙️ Ajustes del Sistema</button>
+        </div>
+
+        <div class="card">
+          <h3>🚀 Rendimiento de Planes</h3>
+          <div style="margin-bottom: 15px;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px;">
+              <span>Membresías Anuales</span>
+              <span>40%</span>
+            </div>
+            <div style="background: #eee; height: 8px; border-radius: 4px; overflow: hidden;">
+              <div style="background: var(--purple-dark); width: 40%; height: 100%;"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px;">
+              <span>Membresías Mensuales</span>
+              <span>60%</span>
+            </div>
+            <div style="background: #eee; height: 8px; border-radius: 4px; overflow: hidden;">
+              <div style="background: var(--yellow); width: 60%; height: 100%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>

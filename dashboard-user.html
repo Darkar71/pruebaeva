@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Panel – SportClub</title>
+  <link rel="stylesheet" href="CSS/styles.css">
+  <style>
+    body.dashboard {
+      background-color: #f8f9fc;
+    }
+
+    .dash-header {
+      background-color: var(--purple-dark);
+      padding: 10px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .dash-header img {
+      height: 45px;
+    }
+
+    .dash-nav {
+      background: white;
+      padding: 0 5%;
+      display: flex;
+      gap: 20px;
+      border-bottom: 1px solid var(--gray-mid);
+    }
+
+    .dash-nav a {
+      padding: 15px 5px;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .dash-nav a.active, .dash-nav a:hover {
+      color: var(--purple-dark);
+      border-bottom-color: var(--yellow);
+    }
+
+    .dash-main {
+      padding: 30px 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .welcome-box {
+      margin-bottom: 30px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--gray-light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .stat-info span {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .stat-info strong {
+      font-size: 1.4rem;
+      color: var(--purple-dark);
+    }
+
+    .dashboard-content {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-bottom: 25px;
+    }
+
+    .card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--purple-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 2px solid var(--gray-light);
+      padding-bottom: 10px;
+    }
+
+    .progress-container {
+      background: #eee;
+      height: 10px;
+      border-radius: 5px;
+      margin: 15px 0;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      background: var(--yellow);
+      height: 100%;
+      width: 65%;
+    }
+
+    .item-list {
+      list-style: none;
+    }
+
+    .item-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .item-list li:last-child {
+      border-bottom: none;
+    }
+
+    .dash-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .dash-table th {
+      text-align: left;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      padding: 10px;
+    }
+
+    .dash-table td {
+      padding: 15px 10px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .badge {
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .btn-action {
+      background: var(--purple-dark);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-action:hover {
+      background: var(--yellow);
+      color: var(--purple-dark);
+    }
+
+    @media (max-width: 900px) {
+      .dashboard-content { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="dashboard">
+
+  <header class="dash-header">
+    <img src="logo_empresa_letra_v1.png" alt="SportClub">
+    <div style="display: flex; gap: 15px; align-items: center;">
+      <span style="color: white; font-weight: 700; font-size: 0.9rem;">Juan Pérez</span>
+      <a href="index.html" style="text-decoration: none; background: rgba(255,255,255,0.2); color: white; padding: 5px 12px; border-radius: 6px; font-size: 0.8rem;">Salir</a>
+    </div>
+  </header>
+
+  <nav class="dash-nav">
+    <a href="#" class="active">Panel General</a>
+    <a href="#entrenamientos">Mis Entrenamientos</a>
+    <a href="#clases">Reservar Clases</a>
+    <a href="#pagos">Pagos</a>
+  </nav>
+
+  <main class="dash-main">
+    
+    <div class="welcome-box">
+      <h2 style="color: var(--purple-dark); font-size: 1.8rem;">¡Hola, Juan! 👋</h2>
+      <p style="color: var(--text-muted);">Tu progreso de esta semana va excelente.</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-icon">🔥</div>
+        <div class="stat-info">
+          <span>Calorías</span>
+          <strong>2,450 kcal</strong>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">💪</div>
+        <div class="stat-info">
+          <span>Entrenamientos</span>
+          <strong>12 sesiones</strong>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⏱️</div>
+        <div class="stat-info">
+          <span>Tiempo Total</span>
+          <strong>15.5 horas</strong>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-info">
+          <span>Racha</span>
+          <strong>5 Días</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-content">
+      
+      <div class="left-col">
+        <div class="card">
+          <h3>🗓️ Próximas Clases</h3>
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>Clase</th>
+                <th>Instructor</th>
+                <th>Horario</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>CrossFit HIIT</strong></td>
+                <td>Carlos R.</td>
+                <td>Hoy, 18:30</td>
+                <td><span class="badge">Confirmado</span></td>
+              </tr>
+              <tr>
+                <td><strong>Spinning Pro</strong></td>
+                <td>Ana M.</td>
+                <td>Mañana, 09:00</td>
+                <td><button class="btn-action">Ver detalles</button></td>
+              </tr>
+              <tr>
+                <td><strong>Yoga Flex</strong></td>
+                <td>Laura S.</td>
+                <td>Vie, 17:00</td>
+                <td><button class="btn-action">Ver detalles</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>📈 Mi Plan de Entrenamiento</h3>
+          <ul class="item-list">
+            <li>
+              <div>
+                <div style="font-weight: 800; color: var(--purple-dark);">Fuerza: Tren Superior</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Rutina de pesas y máquinas</div>
+              </div>
+              <button class="btn-action">Iniciar</button>
+            </li>
+            <li>
+              <div>
+                <div style="font-weight: 800; color: var(--purple-dark);">Cardio Explosivo</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Correr + Burpees</div>
+              </div>
+              <button class="btn-action">Iniciar</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="right-col">
+        <div class="card">
+          <h3>💳 Mi Membresía</h3>
+          <p style="font-size: 0.9rem; font-weight: 700;">Plan Trimestral Pro</p>
+          <div class="progress-container">
+            <div class="progress-bar"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted);">
+            <span>Día 60 de 90</span>
+            <span>65% completado</span>
+          </div>
+          <button class="btn-action" style="width: 100%; margin-top: 20px; background: #f0f0f0; color: var(--purple-dark);">Renovar Plan</button>
+        </div>
+
+        <div class="card" style="background: var(--purple-dark); color: white;">
+          <h3 style="color: var(--yellow); border-color: rgba(255,255,255,0.1);">📢 Aviso del Club</h3>
+          <p style="font-size: 0.9rem; line-height: 1.5;">Este domingo el club cerrará a las 14:00 por mantenimiento de piscina. ¡Toma tus precauciones!</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>

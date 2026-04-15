@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Cuenta – SportClub</title>
+  <link rel="stylesheet" href="CSS/styles.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f4f2f8;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .register-container {
+      display: flex;
+      width: 1000px;
+      min-height: 650px;
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      margin: 20px;
+    }
+
+    .register-image {
+      flex: 1;
+      background: linear-gradient(rgba(46, 26, 71, 0.7), rgba(46, 26, 71, 0.7)), url('img/gim4.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      padding: 50px;
+      text-align: center;
+    }
+
+    .register-image h2 {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 2px;
+    }
+
+    .register-image p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    .register-form-side {
+      flex: 1.2;
+      padding: 40px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .auth-logo {
+      height: 60px;
+      margin-bottom: 20px;
+      margin-top: 0;
+      align-self: center;
+      object-fit: contain;
+    }
+
+    .register-form-side h1 {
+      font-size: 2.2rem;
+      color: var(--purple-dark);
+      margin-bottom: 5px;
+      text-align: center;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 25px;
+      font-size: 0.95rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #eee;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: 'Nunito', sans-serif;
+      transition: all 0.3s;
+      background: #fdfdfd;
+    }
+
+    .form-group input:focus, .form-group select:focus {
+      border-color: var(--purple-dark);
+      outline: none;
+      box-shadow: 0 5px 15px rgba(46, 26, 71, 0.1);
+    }
+
+    .btn-register-submit {
+      width: 100%;
+      padding: 16px;
+      background-color: var(--purple-dark);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+
+    .btn-register-submit:hover {
+      background-color: var(--purple-mid);
+      transform: translateY(-2px);
+    }
+
+    .auth-links {
+      margin-top: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .auth-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .auth-links strong {
+      color: var(--purple-dark);
+    }
+
+    .btn-back-home {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--purple-dark) !important;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 950px) {
+      .register-container {
+        flex-direction: column;
+        width: 100%;
+        max-width: 450px;
+        min-height: auto;
+      }
+      .register-image { display: none; }
+      .register-form-side { padding: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="register-container">
+    
+    <div class="register-image">
+      <h2>¡ÚNETE!</h2>
+      <p>Estas a un paso de cambiar tu vida. Regístrate y comienza a construir tu mejor versión hoy mismo.</p>
+    </div>
+
+    <div class="register-form-side">
+      <img src="logo_empresa_letra_v1.png" alt="SportClub" class="auth-logo">
+      
+      <h1>Crear Cuenta</h1>
+      <p class="subtitle">Completa tus datos para ser parte de la comunidad</p>
+
+      <form onsubmit="return handleRegister(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <input type="text" placeholder="Nombre" required>
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Apellido" required>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+          <input type="email" placeholder="Correo electrónico" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <input type="password" placeholder="Contraseña" minlength="6" required>
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Confirmar" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <select required>
+            <option value="" disabled selected>Interés principal (Opcional)</option>
+            <option>CrossFit</option>
+            <option>Funcional</option>
+            <option>Spinning</option>
+            <option>Yoga</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-register-submit">REGISTRARME</button>
+      </form>
+
+      <div class="auth-links">
+        <a href="login.html">¿Ya eres miembro? <strong>Inicia sesión</strong></a>
+        <a href="index.html" class="btn-back-home">← Volver al inicio</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function handleRegister(event) {
+      event.preventDefault();
+      window.location.href = 'dashboard-user.html';
+      return false;
+    }
+  </script>
+
+</body>
+</html>
